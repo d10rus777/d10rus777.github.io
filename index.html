@@ -3,477 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Тест: Безопасность в интернете</title>
+    <title>Безопасность в интернете</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --primary: #667eea;
+            --success: #2ecc71;
+            --error: #e74c3c;
+            --bg: #f4f7f6;
         }
-        body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            min-height: 100vh;
-            padding: 20px;
-        }
-        .header {
-            text-align: center;
-            padding: 20px;
-            color: white;
-        }
-        .header h1 {
-            font-size: 32px;
-            margin-bottom: 8px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-        .header p {
-            font-size: 16px;
-            opacity: 0.9;
-        }
-        .progress-bar {
-            max-width: 750px;
-            margin: 0 auto 20px;
-            background: rgba(255,255,255,0.3);
-            border-radius: 10px;
-            height: 14px;
-            overflow: hidden;
-        }
-        .progress-fill {
-            height: 100%;
-            background: #2ecc71;
-            width: 0%;
-            transition: width 0.3s;
-        }
-        .progress-text {
-            text-align: center;
-            color: white;
-            font-size: 14px;
-            margin-bottom: 10px;
-        }
-        .container {
-            max-width: 750px;
-            margin: 0 auto;
-        }
-        .question {
-            background: white;
-            border-radius: 12px;
-            padding: 22px 25px;
-            margin-bottom: 18px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transition: transform 0.2s;
-        }
-        .question:hover {
-            transform: translateY(-2px);
-        }
-        .question-num {
-            display: inline-block;
-            background: #667eea;
-            color: white;
-            width: 30px;
-            height: 30px;
-            line-height: 30px;
-            text-align: center;
-            border-radius: 50%;
-            font-weight: bold;
-            margin-right: 10px;
-        }
-        .question-text {
-            font-size: 17px;
-            font-weight: 600;
-            color: #2c3e50;
-            margin-bottom: 14px;
-            display: inline;
-        }
-        label {
-            display: block;
-            padding: 10px 14px;
-            margin: 6px 0;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-size: 15px;
-        }
-        label:hover {
-            border-color: #667eea;
-            background: #f0f0ff;
-        }
-        input[type="radio"] {
-            margin-right: 10px;
-            accent-color: #667eea;
-        }
-        input[type="radio"]:checked + span {
-            font-weight: 600;
-        }
-        label:has(input:checked) {
-            border-color: #667eea;
-            background: #eef0ff;
-        }
-        .correct {
-            border-color: #2ecc71 !important;
-            background: #e8f8f0 !important;
-        }
-        .wrong {
-            border-color: #e74c3c !important;
-            background: #fdeaea !important;
-        }
-        .buttons {
-            text-align: center;
-            margin: 25px 0;
-        }
-        .btn {
-            display: inline-block;
-            padding: 14px 50px;
-            font-size: 18px;
-            font-weight: 600;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            margin: 0 8px;
-            transition: all 0.2s;
-        }
-        .btn-check {
-            background: white;
-            color: #667eea;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-        }
-        .btn-check:hover {
-            background: #f0f0ff;
-            transform: translateY(-2px);
-        }
-        .btn-reset {
-            background: rgba(255,255,255,0.2);
-            color: white;
-            border: 2px solid white;
-        }
-        .btn-reset:hover {
-            background: rgba(255,255,255,0.3);
-        }
-        #result {
-            max-width: 750px;
-            margin: 0 auto 20px;
-            text-align: center;
-            font-size: 24px;
-            font-weight: bold;
-            padding: 20px;
-            border-radius: 12px;
-            display: none;
-            color: white;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
-        .emoji {
-            font-size: 40px;
-            display: block;
-            margin-bottom: 10px;
-        }
-        .footer {
-            text-align: center;
-            color: rgba(255,255,255,0.85);
-            padding: 30px 20px;
-            font-size: 15px;
-            line-height: 1.6;
-        }
-        .footer strong {
-            color: white;
-            font-size: 16px;
-        }
-        .about-btn {
-            display: inline-block;
-            margin-bottom: 10px;
-            padding: 8px 22px;
-            background: rgba(255,255,255,0.2);
-            color: white;
-            border: 2px solid rgba(255,255,255,0.6);
-            border-radius: 20px;
-            font-size: 15px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .about-btn:hover {
-            background: rgba(255,255,255,0.35);
-        }
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-        .modal-overlay.active {
-            display: flex;
-        }
-        .modal {
-            background: white;
-            border-radius: 14px;
-            padding: 30px;
-            max-width: 500px;
-            width: 90%;
-            text-align: center;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
-        }
-        .modal h2 {
-            color: #2c3e50;
-            margin-bottom: 15px;
-        }
-        .modal p {
-            color: #555;
-            font-size: 15px;
-            line-height: 1.6;
-            margin-bottom: 10px;
-        }
-        .modal-close {
-            margin-top: 18px;
-            padding: 10px 35px;
-            background: #667eea;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        .modal-close:hover {
-            background: #5a6fd6;
-        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, sans-serif; background: #f0f2f5; min-height: 100vh; padding: 20px; color: #333; }
+        
+        .header { text-align: center; margin-bottom: 30px; }
+        .header h1 { color: #2c3e50; font-size: 28px; margin-bottom: 10px; }
+        
+        .container { max-width: 700px; margin: 0 auto; }
+        .question { background: white; padding: 25px; border-radius: 16px; margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: 0.3s; }
+        
+        .question-text { font-size: 18px; font-weight: 600; margin-bottom: 15px; display: block; }
+        
+        label { display: block; padding: 12px 15px; margin: 8px 0; border: 2px solid #edf2f7; border-radius: 10px; cursor: pointer; transition: 0.2s; }
+        label:hover { background: #f7fafc; border-color: #cbd5e0; }
+        
+        .explanation { margin-top: 15px; padding: 15px; border-radius: 8px; font-size: 14px; display: none; background: #f8fafc; border-left: 4px solid var(--primary); }
+        
+        /* Стили для проверки */
+        .correct { border-color: var(--success) !important; background: #f0fff4 !important; }
+        .wrong { border-color: var(--error) !important; background: #fff5f5 !important; }
+        .correct .explanation, .wrong .explanation { display: block; }
+
+        .btn { padding: 15px 30px; border: none; border-radius: 10px; font-size: 16px; font-weight: 600; cursor: pointer; margin: 5px; transition: 0.3s; }
+        .btn-check { background: var(--primary); color: white; }
+        .btn-check:hover { background: #5a6fd6; transform: translateY(-2px); }
+        .btn-reset { background: #cbd5e0; color: #4a5568; }
+        
+        #result { text-align: center; font-size: 20px; margin: 30px 0; padding: 20px; border-radius: 12px; display: none; font-weight: 600; }
     </style>
 </head>
 <body>
 
     <div class="header">
-        <button class="about-btn" onclick="openAbout()">ℹ️ О сайте</button>
         <h1>🔒 Безопасность в интернете</h1>
-        <p>Тест из 15 вопросов — проверь свои знания!</p>
+        <p>Пройди тест и узнай, насколько ты защищен</p>
     </div>
 
-    <div class="progress-text" id="progressText">Отвечено: 0 из 15</div>
-    <div class="progress-bar">
-        <div class="progress-fill" id="progressFill"></div>
-    </div>
-
-    <div class="container">
-
-        <div class="question">
-            <p><span class="question-num">1</span><span class="question-text">Что такое фишинг?</span></p>
-            <label><input type="radio" name="q1" value="a"><span>а) Вид компьютерного вируса</span></label>
-            <label><input type="radio" name="q1" value="b"><span>б) Обман для кражи данных через поддельные сайты и письма</span></label>
-            <label><input type="radio" name="q1" value="c"><span>в) Программа для защиты паролей</span></label>
+    <div class="container" id="quizContainer">
         </div>
 
-        <div class="question">
-            <p><span class="question-num">2</span><span class="question-text">Какой пароль считается надёжным?</span></p>
-            <label><input type="radio" name="q2" value="a"><span>а) 12345678</span></label>
-            <label><input type="radio" name="q2" value="b"><span>б) Дата рождения или имя питомца</span></label>
-            <label><input type="radio" name="q2" value="c"><span>в) От 12 символов с буквами, цифрами и спецзнаками</span></label>
-        </div>
-
-        <div class="question">
-            <p><span class="question-num">3</span><span class="question-text">Что нужно сделать при получении подозрительного письма?</span></p>
-            <label><input type="radio" name="q3" value="a"><span>а) Открыть вложение и посмотреть</span></label>
-            <label><input type="radio" name="q3" value="b"><span>б) Перейти по ссылке и проверить</span></label>
-            <label><input type="radio" name="q3" value="c"><span>в) Не открывать и удалить</span></label>
-        </div>
-
-        <div class="question">
-            <p><span class="question-num">4</span><span class="question-text">Для чего нужна двухфакторная аутентификация?</span></p>
-            <label><input type="radio" name="q4" value="a"><span>а) Для дополнительной защиты аккаунта</span></label>
-            <label><input type="radio" name="q4" value="b"><span>б) Для ускорения интернета</span></label>
-            <label><input type="radio" name="q4" value="c"><span>в) Для блокировки рекламы</span></label>
-        </div>
-
-        <div class="question">
-            <p><span class="question-num">5</span><span class="question-text">Что опасно делать при подключении к публичному Wi-Fi?</span></p>
-            <label><input type="radio" name="q5" value="a"><span>а) Читать новости</span></label>
-            <label><input type="radio" name="q5" value="b"><span>б) Вводить данные банковских карт</span></label>
-            <label><input type="radio" name="q5" value="c"><span>в) Смотреть видео</span></label>
-        </div>
-
-        <div class="question">
-            <p><span class="question-num">6</span><span class="question-text">Почему не стоит общаться с незнакомыми людьми в интернете?</span></p>
-            <label><input type="radio" name="q6" value="a"><span>а) Потому что они могут оказаться не теми, за кого себя выдают</span></label>
-            <label><input type="radio" name="q6" value="b"><span>б) Потому что это запрещено законом</span></label>
-            <label><input type="radio" name="q6" value="c"><span>в) Потому что интернет — только для взрослых</span></label>
-        </div>
-
-        <div class="question">
-            <p><span class="question-num">7</span><span class="question-text">Как часто нужно обновлять пароли?</span></p>
-            <label><input type="radio" name="q7" value="a"><span>а) Никогда, если не забыл</span></label>
-            <label><input type="radio" name="q7" value="b"><span>б) Раз в 3–6 месяцев</span></label>
-            <label><input type="radio" name="q7" value="c"><span>в) Каждый день</span></label>
-        </div>
-
-        <div class="question">
-            <p><span class="question-num">8</span><span class="question-text">Что такое кибербуллинг?</span></p>
-            <label><input type="radio" name="q8" value="a"><span>а) Нападение хакеров на сервер</span></label>
-            <label><input type="radio" name="q8" value="b"><span>б) Травля и запугивание в интернете</span></label>
-            <label><input type="radio" name="q8" value="c"><span>в) Вид спортивной игры онлайн</span></label>
-        </div>
-
-        <div class="question">
-            <p><span class="question-num">9</span><span class="question-text">Можно ли скачивать программы с неизвестных сайтов?</span></p>
-            <label><input type="radio" name="q9" value="a"><span>а) Да, если они бесплатные</span></label>
-            <label><input type="radio" name="q9" value="b"><span>б) Нет, там могут быть вирусы</span></label>
-            <label><input type="radio" name="q9" value="c"><span>в) Да, если сайт красиво выглядит</span></label>
-        </div>
-
-        <div class="question">
-            <p><span class="question-num">10</span><span class="question-text">Какую информацию нельзя публиковать в соцсетях?</span></p>
-            <label><input type="radio" name="q10" value="a"><span>а) Свои фотографии с прогулки</span></label>
-            <label><input type="radio" name="q10" value="b"><span>б) Адрес, номер телефона и паспортные данные</span></label>
-            <label><input type="radio" name="q10" value="c"><span>в) Ссылки на интересные видео</span></label>
-        </div>
-
-        <div class="question">
-            <p><span class="question-num">11</span><span class="question-text">Что такое антивирусная программа?</span></p>
-            <label><input type="radio" name="q11" value="a"><span>а) Программа для просмотра видео</span></label>
-            <label><input type="radio" name="q11" value="b"><span>б) Программа для защиты от вирусов и вредоносных программ</span></label>
-            <label><input type="radio" name="q11" value="c"><span>в) Программа для ускорения компьютера</span></label>
-        </div>
-
-        <div class="question">
-            <p><span class="question-num">12</span><span class="question-text">Что такое «цифровой след»?</span></p>
-            <label><input type="radio" name="q12" value="a"><span>а) Отпечаток пальца на экране</span></label>
-            <label><input type="radio" name="q12" value="b"><span>б) Информация, которую пользователь оставляет в интернете</span></label>
-            <label><input type="radio" name="q12" value="c"><span>в) Файл cookie на рабочем столе</span></label>
-        </div>
-
-        <div class="question">
-            <p><span class="question-num">13</span><span class="question-text">Вам пришло сообщение: «Вы выиграли iPhone! Нажмите ссылку». Ваши действия?</span></p>
-            <label><input type="radio" name="q13" value="a"><span>а) Нажать ссылку — вдруг правда</span></label>
-            <label><input type="radio" name="q13" value="b"><span>б) Переслать другу для проверки</span></label>
-            <label><input type="radio" name="q13" value="c"><span>в) Проигнорировать — это мошенничество</span></label>
-        </div>
-
-        <div class="question">
-            <p><span class="question-num">14</span><span class="question-text">Зачем нужно обновлять операционную систему?</span></p>
-            <label><input type="radio" name="q14" value="a"><span>а) Чтобы менять обои рабочего стола</span></label>
-            <label><input type="radio" name="q14" value="b"><span>б) Чтобы закрыть уязвимости и улучшить защиту</span></label>
-            <label><input type="radio" name="q14" value="c"><span>в) Это не обязательно, можно не обновлять</span></label>
-        </div>
-
-        <div class="question">
-            <p><span class="question-num">15</span><span class="question-text">Что делать, если вас пытаются обмануть в интернете?</span></p>
-            <label><input type="radio" name="q15" value="a"><span>а) Сообщить родителям или доверенному взрослому</span></label>
-            <label><input type="radio" name="q15" value="b"><span>б) Ничего не делать и молчать</span></label>
-            <label><input type="radio" name="q15" value="c"><span>в) Ответить тем же</span></label>
-        </div>
-
-    </div>
-
-    <div class="buttons">
-        <button class="btn btn-check" onclick="checkResult()">Проверить результат</button>
-        <button class="btn btn-reset" onclick="resetTest()">Пройти заново</button>
+    <div style="text-align: center;">
+        <button class="btn btn-check" onclick="checkResult()">Проверить ответы</button>
+        <button class="btn btn-reset" onclick="resetTest()">Сбросить</button>
     </div>
 
     <div id="result"></div>
 
-    <div class="footer">
-        <strong>Продукт для школьного проекта</strong><br>
-        Тема: Безопасность в интернете<br>
-        Выполнил: <strong>Данил Леонтьев</strong><br>
-        Школа №55, г. Петрозаводск · 2026 год
-    </div>
-
-    <div class="modal-overlay" id="modalOverlay" onclick="closeAbout(event)">
-        <div class="modal">
-            <h2>ℹ️ О сайте</h2>
-            <p>Этот сайт — продукт школьного проекта на тему <strong>«Безопасность в интернете»</strong>.</p>
-            <p>Тест содержит 15 вопросов, которые помогут проверить знания по безопасному поведению в сети.</p>
-            <p>Выполнил: <strong>Данил Леонтьев</strong><br>Школа №55, г. Петрозаводск, 2026 год</p>
-            <button class="modal-close" onclick="closeAbout()">Закрыть</button>
-        </div>
-    </div>
-
     <script>
-        var answers = {
-            q1: 'b', q2: 'c', q3: 'c', q4: 'a', q5: 'b',
-            q6: 'a', q7: 'b', q8: 'b', q9: 'b', q10: 'b',
-            q11: 'b', q12: 'b', q13: 'c', q14: 'b', q15: 'a'
-        };
-        var total = Object.keys(answers).length;
+        const quizData = [
+            { id: 'q1', q: 'Что такое фишинг?', a: 'b', exp: 'Фишинг — это мошенничество, цель которого — украсть ваши пароли или карты с помощью поддельных сайтов.', choices: ['Вид вируса', 'Обман для кражи данных', 'Защита паролей'] },
+            { id: 'q2', q: 'Какой пароль считается надёжным?', a: 'c', exp: 'Хороший пароль должен быть длинным (от 12 символов) и содержать смесь букв, цифр и спецсимволов.', choices: ['12345678', 'Имя питомца', 'Сложный набор символов'] },
+            { id: 'q3', q: 'Что нужно сделать при получении подозрительного письма?', a: 'c', exp: 'Лучше всего удалить письмо сразу. Не переходите по ссылкам и не скачивайте вложения.', choices: ['Открыть вложение', 'Перейти по ссылке', 'Не открывать и удалить'] },
+            { id: 'q4', q: 'Для чего нужна двухфакторная аутентификация?', a: 'a', exp: 'Это дополнительный код (например, в СМС), который защищает аккаунт, даже если кто-то узнал ваш пароль.', choices: ['Для доп. защиты', 'Для ускорения', 'Для блокировки рекламы'] },
+            { id: 'q5', q: 'Что опасно делать при подключении к публичному Wi-Fi?', a: 'b', exp: 'В публичных сетях хакеры могут перехватить ваши данные, поэтому ввод паролей или карт запрещен.', choices: ['Читать новости', 'Вводить данные карт', 'Смотреть видео'] },
+            { id: 'q6', q: 'Почему не стоит общаться с незнакомцами?', a: 'a', exp: 'Люди в интернете часто выдают себя за других. Никогда не делитесь личными данными.', choices: ['Они не те, за кого себя выдают', 'Это запрещено законом', 'Интернет только для взрослых'] },
+            { id: 'q7', q: 'Как часто нужно обновлять пароли?', a: 'b', exp: 'Рекомендуется менять пароли раз в 3–6 месяцев для безопасности.', choices: ['Никогда', 'Раз в 3–6 месяцев', 'Каждый день'] },
+            { id: 'q8', q: 'Что такое кибербуллинг?', a: 'b', exp: 'Это травля, оскорбления или запугивание в интернете. С этим нельзя оставаться один на один.', choices: ['Хакерская атака', 'Травля в интернете', 'Онлайн-игра'] },
+            { id: 'q9', q: 'Можно ли скачивать программы с неизвестных сайтов?', a: 'b', exp: 'Скачивание со сторонних сайтов — самый простой способ получить вирус на компьютер.', choices: ['Да, если бесплатно', 'Нет, там могут быть вирусы', 'Да, если сайт красивый'] },
+            { id: 'q10', q: 'Какую информацию нельзя публиковать?', a: 'b', exp: 'Ваши адреса, телефоны и паспортные данные — это ключ к вашим деньгам и безопасности.', choices: ['Фото с прогулки', 'Адрес и паспортные данные', 'Ссылки на видео'] },
+            { id: 'q11', q: 'Что такое антивирус?', a: 'b', exp: 'Антивирус — это программа, которая ищет и блокирует вредоносный код на устройстве.', choices: ['Видеопроигрыватель', 'Защита от вирусов', 'Ускоритель ПК'] },
+            { id: 'q12', q: 'Что такое «цифровой след»?', a: 'b', exp: 'Это вся информация, которую вы оставляете в сети: посты, лайки, история поиска. Он остается навсегда.', choices: ['Отпечаток пальца', 'История в интернете', 'Файл cookie'] },
+            { id: 'q13', q: 'Вам написали: «Вы выиграли iPhone!». Что делать?', a: 'c', exp: 'Это классическая ловушка мошенников. Бесплатный сыр бывает только в мышеловке.', choices: ['Нажать ссылку', 'Переслать другу', 'Проигнорировать'] },
+            { id: 'q14', q: 'Зачем обновлять ОС?', a: 'b', exp: 'Обновления закрывают «дыры» в безопасности, через которые хакеры могут взломать ваш компьютер.', choices: ['Ради обоев', 'Чтобы закрыть уязвимости', 'Это не обязательно'] },
+            { id: 'q15', q: 'Что делать, если пытаются обмануть?', a: 'a', exp: 'Никогда не бойтесь рассказать взрослым. Это не стыдно, это единственный правильный шаг.', choices: ['Сообщить взрослым', 'Молчать', 'Ответить тем же'] }
+        ];
 
-        // Обновление бара
-        var radios = document.querySelectorAll('input[type="radio"]');
-        radios.forEach(function(radio) {
-            radio.addEventListener('change', updateProgress);
+        const container = document.getElementById('quizContainer');
+
+        // Отрисовка вопросов
+        quizData.forEach((item, index) => {
+            const div = document.createElement('div');
+            div.className = 'question';
+            div.id = item.id;
+            div.innerHTML = `
+                <span class="question-text">${index + 1}. ${item.q}</span>
+                ${item.choices.map((choice, i) => `
+                    <label>
+                        <input type="radio" name="${item.id}" value="${['a', 'b', 'c'][i]}">
+                        <span>${['а', 'б', 'в'][i]}) ${choice}</span>
+                    </label>
+                `).join('')}
+                <div class="explanation"><b>Пояснение:</b> ${item.exp}</div>
+            `;
+            container.appendChild(div);
         });
 
-        function updateProgress() {
-            var count = 0;
-            for (var q in answers) {
-                var sel = document.querySelector('input[name="' + q + '"]:checked');
-                if (sel) count++;
-            }
-            document.getElementById('progressText').textContent = 'Отвечено: ' + count + ' из ' + total;
-            document.getElementById('progressFill').style.width = (count / total * 100) + '%';
-        }
-
         function checkResult() {
-            var score = 0;
-            // Сбросить стиля
-            document.querySelectorAll('label').forEach(function(l) {
-                l.classList.remove('correct', 'wrong');
+            let score = 0;
+            quizData.forEach(item => {
+                const selected = document.querySelector(`input[name="${item.id}"]:checked`);
+                const qDiv = document.getElementById(item.id);
+                
+                if (selected) {
+                    if (selected.value === item.a) {
+                        qDiv.classList.add('correct');
+                        score++;
+                    } else {
+                        qDiv.classList.add('wrong');
+                    }
+                } else {
+                    qDiv.classList.add('wrong'); // Если не ответил
+                }
             });
 
-            for (var q in answers) {
-                var selected = document.querySelector('input[name="' + q + '"]:checked');
-                if (selected) {
-                    if (selected.value === answers[q]) {
-                        score++;
-                        selected.closest('label').classList.add('correct');
-                    } else {
-                        selected.closest('label').classList.add('wrong');
-                        var correctInput = document.querySelector('input[name="' + q + '"][value="' + answers[q] + '"]');
-                        correctInput.closest('label').classList.add('correct');
-                    }
-                }
-            }
-
-            var resultDiv = document.getElementById('result');
+            const resultDiv = document.getElementById('result');
             resultDiv.style.display = 'block';
-
-            var emoji, text, color;
-            var percent = Math.round(score / total * 100);
-
-            if (percent === 100) {
-                emoji = '🏆'; text = 'Превосходно! Ты знаешь всё!'; color = '#2ecc71';
-            } else if (percent >= 80) {
-                emoji = '😊'; text = 'Отличный результат!'; color = '#27ae60';
-            } else if (percent >= 60) {
-                emoji = '👍'; text = 'Хорошо, но можно лучше!'; color = '#f39c12';
-            } else if (percent >= 40) {
-                emoji = '🤔'; text = 'Стоит повторить тему'; color = '#e67e22';
-            } else {
-                emoji = '📖'; text = 'Нужно подучить — попробуй ещё раз!'; color = '#e74c3c';
-            }
-
-            resultDiv.style.background = color;
-            resultDiv.innerHTML = '<span class="emoji">' + emoji + '</span>' + score + ' из ' + total + ' (' + percent + '%)<br>' + text;
-            resultDiv.scrollIntoView({behavior: 'smooth'});
+            resultDiv.innerHTML = `Ваш результат: ${score} из ${quizData.length}`;
+            resultDiv.style.background = score > 10 ? '#d1fae5' : '#fee2e2';
         }
 
         function resetTest() {
-            for (var q in answers) {
-                var checked = document.querySelector('input[name="' + q + '"]:checked');
-                if (checked) checked.checked = false;
-            }
-            document.querySelectorAll('label').forEach(function(l) {
-                l.classList.remove('correct', 'wrong');
-            });
-            document.getElementById('result').style.display = 'none';
-            updateProgress();
-            window.scrollTo({top: 0, behavior: 'smooth'});
-        }
-
-        function openAbout() {
-            document.getElementById('modalOverlay').classList.add('active');
-        }
-
-        function closeAbout(e) {
-            if (!e || e.target === document.getElementById('modalOverlay')) {
-                document.getElementById('modalOverlay').classList.remove('active');
-            }
+            window.location.reload();
         }
     </script>
 </body>
